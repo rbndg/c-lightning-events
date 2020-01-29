@@ -1,0 +1,27 @@
+{
+  "name": "c-lightning-events",
+  "version": "1.0.0",
+  "description": "Subscribe to C-Lightning events with websockets",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rbndg/c-lightning-events.git"
+  },
+  "author": "@r32a",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rbndg/c-lightning-events/issues"
+  },
+  "homepage": "https://github.com/rbndg/c-lightning-events#readme",
+  "dependencies": {
+    "clightningjs": "^0.2.1",
+    "ws": "^7.2.1"
+  },
+  "optionalDependencies": {
+    "bufferutil": "^4.0.1",
+    "utf-8-validate": "^5.0.2"
+  }
+}
