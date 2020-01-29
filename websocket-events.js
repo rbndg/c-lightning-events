@@ -1,27 +1,25 @@
 #!/usr/bin/env node
 
-const WebSocket = require("ws")
-const Plugin = require('clightningjs');
-const plugin = new Plugin();
+const WebSocket = require('ws')
+const Plugin = require('clightningjs')
+const plugin = new Plugin()
 let broadcast
 
 plugin.onInit = (params) => {
   const port = params.options['websocket-port']
   let eventList = params.options['websocket-events']
 
-  if(!eventList || eventList === "all"){
+  if (!eventList || eventList === 'all') {
     eventList = EVENTS
-  } else{
-    eventList = eventList.split(",")
+  } else {
+    eventList = eventList.split(',')
   }
 
-  broadcast = (params)=>{
+  broadcast = (params) => {
     const evName = Object.keys(params)[0]
-    plugin.log(evName)
-    if(!eventList.includes(evName)) return
+    if (!eventList.includes(evName)) return
 
-    wss.clients.forEach(function each(client) {
-      plugin.log('client')
+    wss.clients.forEach(function each (client) {
       if (client !== wss && client.readyState === WebSocket.OPEN) {
         client.send(JSON.stringify(params))
       }
@@ -29,17 +27,15 @@ plugin.onInit = (params) => {
   }
 
   const wss = new WebSocket.Server({ port })
-  wss.on("connection",()=>{
-    plugin.log("new websocket connection")
+  wss.on('connection', () => {
+    plugin.log('new websocket connection')
   })
 
-  wss.on("error",(err)=>{
-    plugin.log("Websocket error")
+  wss.on('error', (err) => {
+    plugin.log('Websocket error')
     plugin.log(err)
   })
-
-};
-
+}
 
 const EVENTS = [
   'channel_opened',
@@ -49,20 +45,18 @@ const EVENTS = [
   'warning',
   'forward_event',
   'sendpay_success',
-  'sendpay_failure'  
+  'sendpay_failure'
 ]
 
-EVENTS.map((ev)=>{
-  plugin.log(ev)
-
-  plugin.subscribe(ev);
+EVENTS.map((ev) => {
+  plugin.subscribe(ev)
   plugin.notifications[ev].on(ev, (params) => {
-    if(broadcast){
+    if (broadcast) {
       broadcast(params)
     }
-  });
+  })
 })
 
-plugin.addOption('websocket-port', '8080', 'Websocket port for notifications', 'string');
-plugin.addOption('websocket-events', 'all', 'List of events to broadcast. (Default: broadcast everything)', 'string');
-plugin.start();
+plugin.addOption('websocket-port', '8080', 'Websocket port for notifications', 'string')
+plugin.addOption('websocket-events', 'all', 'List of events to broadcast. (Default: broadcast everything)', 'string')
+plugin.start()
