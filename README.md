@@ -6,7 +6,8 @@ Subscribe to C-Lightning events with websocket
 
 1) git clone this repo
 2) `npm install .`
-3) Update C-lightinng config with the following:
+3) `chmod +x webseock-events.js`
+4) Update C-lightinng config with the following:
 ```
 plugin=/path/to/websocket-events.js
 websocket-events=all // Comma seperated list of event types you want broadcasted
