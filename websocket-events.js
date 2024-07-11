@@ -39,13 +39,22 @@ plugin.onInit = (params) => {
 
 const EVENTS = [
   'channel_opened',
+  'channel_open_failed',
+  'channel_state_changed',
   'connect',
   'disconnect',
+  'custommsg',
   'invoice_payment',
+  'invoice_creation',
   'warning',
   'forward_event',
   'sendpay_success',
-  'sendpay_failure'
+  'sendpay_failure',
+  'coin_movement',
+  'balance_snapshot',
+  'block_added',
+  'openchannel_peer_sigs',
+  'shutdown',
 ]
 
 EVENTS.map((ev) => {
