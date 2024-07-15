@@ -16,4 +16,4 @@ websocket-port=8080 //Websocket port
 
 
 #### Further Reading
-[List of C-Lightning events](https://lightning.readthedocs.io/PLUGINS.html#event-notifications)
+[List of Core-Lightning events](https://docs.corelightning.org/docs/event-notifications)
